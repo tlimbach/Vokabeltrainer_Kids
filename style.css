@@ -1,0 +1,304 @@
+/* Basis-Stile für größere Bildschirme (Standard) */
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  flex-direction: column;
+
+  background-color: #fffdef;
+  background-image: url('images/paisley.png');
+  background-repeat: repeat; /* Wiederholt das Muster */
+  background-size: auto; /* Standardgröße */
+}
+
+#outer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 450px;
+}
+
+#container {
+  width: 100%;
+  background-color: rgb(231, 254, 249);
+  
+  padding: 0px 30px 30px 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+ /* text-align: center; */
+  position: relative;
+  height: auto;
+
+  background-image: repeating-linear-gradient(
+    -45deg,
+    #fffdef,
+    #fbf9e7 16px,
+    #fffdef 14px,
+    #fbf9e7 10px
+  );
+  
+
+}
+
+button,
+select {
+  margin-top: 15px;
+  padding: 10px;
+  width: 100%;
+  font-size: 1rem;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.hidden {
+  display: none;
+}
+
+#progress {
+  display: flex;
+  margin-top: 20px;
+  height: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.progress-segment {
+  flex: 1;
+  background-color: #ddd;
+}
+
+.progress-correct {
+  background-color: #5cd360;
+}
+
+.progress-incorrect {
+  background-color: #cc1104;
+}
+
+#choices {
+  display: grid;
+  grid-template-columns: 200px 200px;
+  grid-template-rows: 150px 150px;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+#choices button.correct {
+  background-color: #5cd360 !important;
+  color: white;
+}
+
+#choices button.incorrect {
+  background-color: #cc1104 !important;
+  color: white;
+}
+
+#choices button {
+  width: 200px;
+  height: 150px;
+  font-size: 1.5em;
+  cursor: pointer;
+  border-radius: 8px;
+  border: none;
+  background-color: #eee69d;
+  color: rgb(2, 1, 1);
+  transition: background-color 0.3s;
+}
+
+#choices button:hover {
+  background-color: #ebde6a;
+}
+
+#abortButton {
+  margin-top: 20px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  background-color: #fef5d13f;
+  color: rgb(205, 205, 205);
+  width: auto;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  border: 1px solid rgb(205, 205, 205);
+  align-self: flex-end;
+  margin-right: -30px;
+}
+
+#flashcard-mode {
+  
+  flex-direction: column;
+  align-items: center;
+}
+
+#abortButton:hover {
+  background-color: #fef5d1ff;
+}
+
+
+#knowButtons {
+  width: 93%;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+#knowButton,
+#dontKnowButton,
+#flipButton {
+  width: 45%;
+  height: 4.5em;
+  padding: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 10px;
+  border: 2px solid rgb(206, 206, 206);
+  background-color: #eee69d95;
+  transition: background-color 0.3s;
+}
+
+#flipButton {
+  width: 86%;
+}
+
+#knowButton {
+  background-color: #CDEAD695;  
+}
+
+#dontKnowButton {
+  background-color: #FADADD95;
+}
+
+#knowButton:hover {
+  background-color: #A8D5BA95; 
+}
+
+#dontKnowButton:hover {
+  background-color: #F4B6C295;
+}
+
+#flipButton:hover
+{
+  background-color: #ebde6a;
+}
+
+
+
+#question, #vocabulary {
+  display: grid;
+  place-items: center;
+  margin: 20px;
+  padding: 10px;
+  font-size: 2.2em;
+  height: 120px;
+}
+
+
+.large-text {
+  padding: 15px;
+}
+
+.highlight {
+  background-color: rgb(255, 255, 219) !important;
+  color: rgb(14, 10, 2) !important;
+  border: 2px solid rebeccapurple !important;
+}
+
+#fileselect {
+  padding-bottom: 20px;
+  padding-top: 15px;
+}
+
+#settings select,
+#settings button {
+    margin-bottom: 20px; /* Fügen Sie hier den gewünschten Abstand hinzu */
+    background-color: rgb(255, 254, 242);
+}
+
+#settings button {
+  height: 60px;
+  border-radius: 10px;
+  background-color: rgb(235, 235, 235);
+}
+
+select, button {
+  color: black !important;
+}
+
+/* Voice Settings */
+  #voice {
+    display: flex;
+    gap: 20px; /* Abstand zwischen Combobox und Button */
+    align-items: center; /* Vertikale Ausrichtung */
+    padding-right: 30px;
+  }
+
+  #voices {
+    flex-shrink: 1;
+    min-width: 50px;
+  }
+
+  #voice button {
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+    flex-grow: 0;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0; /* Entfernt zusätzlichen Innenabstand */
+    margin: 0; /* Entfernt eventuelle äußere Abstände */
+    border-radius: 130px;
+    position: relative;
+    top:-5px;
+}
+
+
+/* Media Query für kleinere Bildschirme (z. B. iPhone 15 Pro) */
+@media (max-width: 500px) {
+  #container {
+      width: 75%; /* Anpassung der Breite an den Bildschirm */
+      padding: 10px;
+  }
+
+  #choices {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      gap: 10px;
+  }
+
+  #choices button {
+      width: 100%; /* Buttons füllen die Breite */
+      height: 80px; /* Kleinere Höhe für kleine Bildschirme */
+      font-size: 1.6em; /* Kleinere Schriftgröße */
+  }
+
+  #question, #vocabulary {
+      font-size: 1.8em; /* Schriftgröße anpassen */
+      height: 80px;
+  }
+
+  
+  #knowButton,
+  #dontKnowButton,
+  #flipButton {
+      width: 100%; /* Buttons in voller Breite für einfache Bedienung */
+      font-size: 0.9rem;
+      height: 3.5em;
+  }
+
+  #abortButton {
+    margin-right: 40px;
+  }
+
+ 
+  
+}
