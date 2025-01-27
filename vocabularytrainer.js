@@ -37,100 +37,149 @@ const defaultVocabulary = [
 */
 
 const defaultVocabulary = [
-  { deutsch: "Der Apfel, den ich gekauft habe, ist sehr saftig und lecker.", englisch: "The apple I bought is very juicy and delicious.", score: 0 },
-  { deutsch: "Das Haus am Ende der Straße hat ein rotes Dach und einen großen Garten.", englisch: "The house at the end of the street has a red roof and a large garden.", score: 0 },
-  { deutsch: "Der Tisch im Esszimmer ist mit einer schönen Tischdecke bedeckt.", englisch: "The table in the dining room is covered with a beautiful tablecloth.", score: 0 },
-  { deutsch: "Ich lese jeden Abend ein spannendes Buch, bevor ich schlafen gehe.", englisch: "I read an exciting book every evening before I go to sleep.", score: 0 },
-  { deutsch: "Der Stuhl, auf dem ich sitze, ist sehr bequem und hat weiche Polster.", englisch: "The chair I am sitting on is very comfortable and has soft cushions.", score: 0 },
-  { deutsch: "Der Hund spielt gerne im Garten und gräbt Löcher in den Boden.", englisch: "The dog likes to play in the garden and digs holes in the ground.", score: 0 },
-  { deutsch: "Die Katze schläft gerne auf dem Fensterbrett und sonnt sich im Licht.", englisch: "The cat likes to sleep on the windowsill and bask in the sunlight.", score: 0 },
-  { deutsch: "Die alte Schule in der Stadt hat viele Klassenzimmer und lange Flure.", englisch: "The old school in the town has many classrooms and long hallways.", score: 0 },
-  { deutsch: "Der Baum vor unserem Haus ist im Frühling voller grüner Blätter.", englisch: "The tree in front of our house is full of green leaves in spring.", score: 0 },
-  { deutsch: "Das Auto fährt schnell über die Autobahn und überholt andere Fahrzeuge.", englisch: "The car drives quickly on the highway and overtakes other vehicles.", score: 0 }
+  {
+    deutsch: "Der Apfel, den ich gekauft habe, ist sehr saftig und lecker.",
+    englisch: "The apple I bought is very juicy and delicious.",
+    score: 0,
+  },
+  {
+    deutsch:
+      "Das Haus am Ende der Straße hat ein rotes Dach und einen großen Garten.",
+    englisch:
+      "The house at the end of the street has a red roof and a large garden.",
+    score: 0,
+  },
+  {
+    deutsch: "Der Tisch im Esszimmer ist mit einer schönen Tischdecke bedeckt.",
+    englisch:
+      "The table in the dining room is covered with a beautiful tablecloth.",
+    score: 0,
+  },
+  {
+    deutsch:
+      "Ich lese jeden Abend ein spannendes Buch, bevor ich schlafen gehe.",
+    englisch: "I read an exciting book every evening before I go to sleep.",
+    score: 0,
+  },
+  {
+    deutsch:
+      "Der Stuhl, auf dem ich sitze, ist sehr bequem und hat weiche Polster.",
+    englisch:
+      "The chair I am sitting on is very comfortable and has soft cushions.",
+    score: 0,
+  },
+  {
+    deutsch: "Der Hund spielt gerne im Garten und gräbt Löcher in den Boden.",
+    englisch:
+      "The dog likes to play in the garden and digs holes in the ground.",
+    score: 0,
+  },
+  {
+    deutsch:
+      "Die Katze schläft gerne auf dem Fensterbrett und sonnt sich im Licht.",
+    englisch:
+      "The cat likes to sleep on the windowsill and bask in the sunlight.",
+    score: 0,
+  },
+  {
+    deutsch:
+      "Die alte Schule in der Stadt hat viele Klassenzimmer und lange Flure.",
+    englisch:
+      "The old school in the town has many classrooms and long hallways.",
+    score: 0,
+  },
+  {
+    deutsch: "Der Baum vor unserem Haus ist im Frühling voller grüner Blätter.",
+    englisch:
+      "The tree in front of our house is full of green leaves in spring.",
+    score: 0,
+  },
+  {
+    deutsch:
+      "Das Auto fährt schnell über die Autobahn und überholt andere Fahrzeuge.",
+    englisch:
+      "The car drives quickly on the highway and overtakes other vehicles.",
+    score: 0,
+  },
 ];
-
 
 populateVoiceList();
 
 function playVoiceSample() {
-  
-  const voiceSelect = document.getElementById('voices');
+  const voiceSelect = document.getElementById("voices");
   const selectedVoiceName = voiceSelect.value;
 
   if (!selectedVoiceName) {
-    alert('Bitte wählen Sie eine Stimme aus.');
+    alert("Bitte wählen Sie eine Stimme aus.");
     return;
   }
 
   playVoice(selectedVoiceName, "Hello, my name is " + selectedVoiceName);
-
-  
 }
 
 function playVoice(selectedVoiceName, text) {
-
-  console.log("voicename >"+selectedVoiceName+"<");
+  console.log("voicename >" + selectedVoiceName + "<");
 
   const synth = window.speechSynthesis;
   const voices = synth.getVoices();
-  const selectedVoice = voices.find(voice => voice.name === selectedVoiceName);
+  const selectedVoice = voices.find(
+    (voice) => voice.name === selectedVoiceName
+  );
   const utterThis = new SpeechSynthesisUtterance(text);
   utterThis.voice = selectedVoice;
   utterThis.rate = 0.5;
-  utterThis.pitch=1.4;
+  utterThis.pitch = 1.4;
 
   synth.speak(utterThis);
 }
 
 function populateVoiceList() {
-
   let useHardcoded = true;
 
   if (useHardcoded) {
-  const voiceSelect = document.getElementById('voices');
+    const voiceSelect = document.getElementById("voices");
 
-  voiceSelect.innerHTML = '';
+    voiceSelect.innerHTML = "";
 
+    // Hardcodierte Stimmenliste
+    const hardcodedVoices = [
+      "Samantha",
+      "Daniel",
+      //  'Karen',
 
-  // Hardcodierte Stimmenliste
-  const hardcodedVoices = [
-    'Samantha',
-    'Daniel',
-  //  'Karen',
-   
-    'Orgel',
-    'Cellos',
-    'Zarvox',
-    'Flüstern',
-    'Seifenblasen'
-  ];
+      "Orgel",
+      "Cellos",
+      "Zarvox",
+      "Flüstern",
+      "Seifenblasen",
+    ];
 
-  // Optionen in das Select-Element einfügen
-  hardcodedVoices.forEach(voice => {
-    const option = document.createElement('option');
-    option.value = voice;
-    option.textContent = voice;
-    voiceSelect.appendChild(option);
-  });
-} else {
-  const voices = window.speechSynthesis.getVoices();
-  const voiceSelect = document.getElementById('voices');
+    // Optionen in das Select-Element einfügen
+    hardcodedVoices.forEach((voice) => {
+      const option = document.createElement("option");
+      option.value = voice;
+      option.textContent = voice;
+      voiceSelect.appendChild(option);
+    });
+  } else {
+    const voices = window.speechSynthesis.getVoices();
+    const voiceSelect = document.getElementById("voices");
 
-  console.log(voices.length + " voices");
+    console.log(voices.length + " voices");
 
-  // Filter englisches Englisch
-  const filteredVoices = voices.filter(voice => 
-    voice.lang.startsWith('en')
-  );
+    // Filter englisches Englisch
+    const filteredVoices = voices.filter((voice) =>
+      voice.lang.startsWith("en")
+    );
 
-  // Optionen in das Select-Element einfügen
-  filteredVoices.forEach(voice => {
-    const option = document.createElement('option');
-    option.value = voice.name;
-    option.textContent = `${voice.name} (${voice.lang})`;
-    voiceSelect.appendChild(option);
-  });
-}
+    // Optionen in das Select-Element einfügen
+    filteredVoices.forEach((voice) => {
+      const option = document.createElement("option");
+      option.value = voice.name;
+      option.textContent = `${voice.name} (${voice.lang})`;
+      voiceSelect.appendChild(option);
+    });
+  }
 }
 
 /*
@@ -154,9 +203,11 @@ function populateVoiceList() {
   });
 }*/
 
-
 // Eventlistener für das Laden der Stimmen (falls verzögert geladen)
-if (typeof speechSynthesis !== 'undefined' && speechSynthesis.onvoiceschanged !== undefined) {
+if (
+  typeof speechSynthesis !== "undefined" &&
+  speechSynthesis.onvoiceschanged !== undefined
+) {
   speechSynthesis.onvoiceschanged = populateVoiceList;
 } else {
   populateVoiceList();
@@ -169,12 +220,12 @@ function selectVocabularyFile() {
 function speak() {
   console.log("speak");
   const selectedVoice = document.getElementById("voices").value;
-  const textElement = document.getElementById('vocabulary');
+  const textElement = document.getElementById("vocabulary");
   const direction = document.getElementById("direction").value;
   const text = textElement.textContent || textElement.innerText; // Textinhalt des Elements
 
-  //if (direction === 'en-de') 
-    {
+  //if (direction === 'en-de')
+  {
     playVoice(selectedVoice, text);
   }
 }
@@ -182,39 +233,42 @@ function speak() {
 function speakQuestion() {
   console.log("speakQuestion");
   const selectedVoice = document.getElementById("voices").value;
-  const textElement = document.getElementById('question');
+  const textElement = document.getElementById("question");
   const direction = document.getElementById("direction").value;
   const text = textElement.textContent || textElement.innerText; // Textinhalt des Elements
 
-  //if (direction === 'en-de') 
-    {
+  //if (direction === 'en-de')
+  {
     playVoice(selectedVoice, text);
   }
 }
 
-document.getElementById("fileInput").addEventListener("change", function (event) {
-  const file = event.target.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = function (e) {
-      const content = e.target.result;
-      parseVocabulary(content);
-      document.getElementById("settings").classList.remove("hidden");
-    };
-    reader.readAsText(file);
-  } else {
-    vocabularyList = defaultVocabulary;
-  }
-});
+document
+  .getElementById("fileInput")
+  .addEventListener("change", function (event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const content = e.target.result;
+        parseVocabulary(content);
+        document.getElementById("settings").classList.remove("hidden");
+      };
+      reader.readAsText(file);
+    } else {
+      vocabularyList = defaultVocabulary;
+    }
+  });
 
 function parseVocabulary(content) {
   vocabularyList = content
     .trim()
     .split("\n")
-    .map(line => {
+    .map((line) => {
       // Trennen Sie die Zeile am ersten Bindestrich, um `deutsch` und `englisch` zu erhalten
       const parts = line.split(" - ");
-      if (parts.length === 2) { // Nur wenn exakt ein Bindestrich vorhanden ist
+      if (parts.length === 2) {
+        // Nur wenn exakt ein Bindestrich vorhanden ist
         const deutsch = parts[0].trim();
         const englisch = parts[1].trim();
         return { deutsch, englisch, score: 0 };
@@ -223,11 +277,10 @@ function parseVocabulary(content) {
         return null; // Ignorieren der Zeile, wenn das Format nicht passt
       }
     })
-    .filter(entry => entry !== null); // Entfernen aller ungültigen Einträge
+    .filter((entry) => entry !== null); // Entfernen aller ungültigen Einträge
 
   console.log("Vokabelliste:", vocabularyList);
 }
-
 
 function confirmEndTraining() {
   if (confirm("Möchten Sie das Training wirklich abbrechen?")) {
@@ -236,7 +289,6 @@ function confirmEndTraining() {
 }
 
 function startTraining() {
-
   if (vocabularyList.length === 0) {
     vocabularyList = defaultVocabulary;
     console.log("Standard-Vokabelliste geladen:", vocabularyList);
@@ -262,15 +314,18 @@ function startTraining() {
 
 function startFlashcardMode() {
   document.getElementById("flashcard-mode").classList.remove("hidden");
-  document.getElementById("flashcard-mode").style.display="flex";
+  document.getElementById("flashcard-mode").style.display = "flex";
   selectNextFlashcard();
 }
 
 function selectNextFlashcard() {
-  const totalScore = vocabularyList.reduce((acc, vocab) => acc + (10 - vocab.score), 0);
+  const totalScore = vocabularyList.reduce(
+    (acc, vocab) => acc + (10 - vocab.score),
+    0
+  );
   let random = Math.random() * totalScore;
   for (let vocab of vocabularyList) {
-    random -= (10 - vocab.score);
+    random -= 10 - vocab.score;
     if (random <= 0) {
       setFlashcard(vocab);
       return;
@@ -298,7 +353,6 @@ function setFlashcard(vocab) {
   document.getElementById("knowButton").classList.add("hidden");
   document.getElementById("dontKnowButton").classList.add("hidden");
 }
-
 
 function flipCard() {
   document.getElementById("vocabulary").innerText =
@@ -350,18 +404,23 @@ function loadMultipleChoiceQuestion() {
 
   if (questionText.length > 40) {
     document.getElementById("question").style.fontSize = "1.6em";
-  }
-  else {
+  } else {
     document.getElementById("question").style.fontSize = "";
   }
 
   document.getElementById("question").innerText = questionText;
 
+  if (direction === "en-de") {
+    setTimeout(() => {
+      speakQuestion(questionText);
+    }, 650);
+  }
+
   const choices = [correctAnswer];
   while (choices.length < 4) {
     const randomChoice =
       vocabularyList[Math.floor(Math.random() * vocabularyList.length)][
-      direction === "de-en" ? "englisch" : "deutsch"
+        direction === "de-en" ? "englisch" : "deutsch"
       ];
     if (!choices.includes(randomChoice)) {
       choices.push(randomChoice);
@@ -372,7 +431,7 @@ function loadMultipleChoiceQuestion() {
   const choicesContainer = document.getElementById("choices");
   choicesContainer.innerHTML = ""; // Leeren des Containers
 
-  choices.forEach(choice => {
+  choices.forEach((choice) => {
     const button = document.createElement("button");
     button.textContent = choice; // Text wird unverändert angezeigt
 
@@ -387,18 +446,17 @@ function loadMultipleChoiceQuestion() {
       button.style.fontSize = ""; // Standardgröße zurücksetzen
     }
 
-
     // Speichern des Buttons, falls es die korrekte Antwort ist
     if (choice === correctAnswer) {
       correctButton = button; // Dieser Button enthält die richtige Antwort
     }
 
-    button.addEventListener("click", () => checkAnswer(button, choice, correctAnswer, correctButton));
+    button.addEventListener("click", () =>
+      checkAnswer(button, choice, correctAnswer, correctButton)
+    );
     choicesContainer.appendChild(button);
   });
 }
-
-
 
 function checkAnswer(button, selected, correct, correctButton) {
   var incorrect = false;
@@ -417,35 +475,35 @@ function checkAnswer(button, selected, correct, correctButton) {
     setTimeout(() => {
       button.classList.remove("correct", "incorrect");
     }, 500);
-
   }
 
   // Entferne die Markierungen nach 1 Sekunde und lade die nächste Frage
-  setTimeout(() => {
-    button.classList.remove("correct", "incorrect");
-    currentIndex++;
-    loadMultipleChoiceQuestion();
-  }, incorrect ? 1500 : 800);
+  setTimeout(
+    () => {
+      button.classList.remove("correct", "incorrect");
+      currentIndex++;
+      loadMultipleChoiceQuestion();
+    },
+    incorrect ? 1500 : 800
+  );
 }
 
 function showResultDialog() {
-
-  if (correctAnswers<vocabularyList.length) {
-    playMp3Sound('sounds/marimba-win.mp3');
+  if (correctAnswers < vocabularyList.length) {
+    playMp3Sound("sounds/marimba-win.mp3");
   } else {
     var soundmode = document.getElementById("theme").value;
-    if (soundmode === 'burp') {
-      playMp3Sound('sounds/burps/winner-burp.mp3');
-    } 
-    if (soundmode === 'fart') {
-      playMp3Sound('sounds/farts/winner-fart.mp3');
+    if (soundmode === "burp") {
+      playMp3Sound("sounds/burps/winner-burp.mp3");
     }
-    if (soundmode === 'normal') {
-      playMp3Sound('sounds/cheer.mp3');
+    if (soundmode === "fart") {
+      playMp3Sound("sounds/farts/winner-fart.mp3");
+    }
+    if (soundmode === "normal") {
+      playMp3Sound("sounds/cheer.mp3");
     }
   }
-  
-  
+
   setTimeout(() => {
     alert(
       `Herzlichen Glückwunsch! Du hast ${correctAnswers} von ${vocabularyList.length} Vokabeln korrekt übersetzt!`
@@ -454,7 +512,6 @@ function showResultDialog() {
   }, 1000); // Verzögerung des Alerts um 1 Sekunde
 }
 
-
 function endTraining() {
   document.getElementById("abortButton").classList.add("hidden");
   document.getElementById("settings").classList.remove("hidden");
@@ -462,40 +519,56 @@ function endTraining() {
   document.getElementById("multiple-choice-mode").classList.add("hidden");
   document.getElementById("fileselect").classList.remove("hidden");
   document.getElementById("startBtn").classList.remove("hidden");
-  document.getElementById("flashcard-mode").style.display="none";
+  document.getElementById("flashcard-mode").style.display = "none";
 }
 
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
 // Prüfen, ob der AudioContext im "suspended" Zustand ist und ggf. auf "running" setzen
-document.addEventListener("click", () => {
-  if (audioContext.state === 'suspended') {
-    audioContext.resume();
-  }
-}, { once: true }); // Nur einmal ausführen
-
-
+document.addEventListener(
+  "click",
+  () => {
+    if (audioContext.state === "suspended") {
+      audioContext.resume();
+    }
+  },
+  { once: true }
+); // Nur einmal ausführen
 
 function playMp3Sound(soundfile) {
   const audio = new Audio(soundfile); // Pfad zur Sounddatei
   audio.play();
 }
 
-function playPositiveSound(){
+function playPositiveSound() {
   var soundmode = document.getElementById("theme").value;
   console.log(" p sounds mode " + soundmode);
-  if (soundmode === 'normal') {
-    playMp3Sound('sounds/triangle_open.mp3');
+  if (soundmode === "normal") {
+    playMp3Sound("sounds/triangle_open.mp3");
   }
 
-  if (soundmode === 'burp') {
-    var soundbase = 'sounds/burps/';
-    playOneOfMp3Sounds(soundbase+'belch.mp3', soundbase+'burp1.mp3', soundbase+'burp2.mp3', soundbase+'burp3.mp3', soundbase+'burp4.mp3', soundbase+'burp5.mp3');
+  if (soundmode === "burp") {
+    var soundbase = "sounds/burps/";
+    playOneOfMp3Sounds(
+      soundbase + "belch.mp3",
+      soundbase + "burp1.mp3",
+      soundbase + "burp2.mp3",
+      soundbase + "burp3.mp3",
+      soundbase + "burp4.mp3",
+      soundbase + "burp5.mp3"
+    );
   }
 
-  if (soundmode === 'fart') {
-    var soundbase = 'sounds/farts/';
-    playOneOfMp3Sounds(soundbase+'fart1.mp3', soundbase+'fart2.mp3', soundbase+'fart3.mp3', soundbase+'fart4.mp3', soundbase+'fart5.mp3', soundbase+'fart6.mp3');
+  if (soundmode === "fart") {
+    var soundbase = "sounds/farts/";
+    playOneOfMp3Sounds(
+      soundbase + "fart1.mp3",
+      soundbase + "fart2.mp3",
+      soundbase + "fart3.mp3",
+      soundbase + "fart4.mp3",
+      soundbase + "fart5.mp3",
+      soundbase + "fart6.mp3"
+    );
   }
 }
 
@@ -511,12 +584,9 @@ function playOneOfMp3Sounds(...sounds) {
 function playNegativSound() {
   var soundmode = document.getElementById("theme").value;
   console.log(" n sounds mode " + soundmode);
-  if (soundmode === 'normal') {
-    playMp3Sound('sounds/error-5.mp3');
+  if (soundmode === "normal") {
+    playMp3Sound("sounds/error-5.mp3");
   } else {
-    playMp3Sound('sounds/triangle_open.mp3');
+    playMp3Sound("sounds/triangle_open.mp3");
   }
-
-
 }
-
