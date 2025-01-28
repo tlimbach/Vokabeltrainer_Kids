@@ -6,6 +6,8 @@ let correctAnswers = 0;
 let currentIndex = 0;
 let progressSegments = [];
 
+const LOCAL_STORAGE_KEY = "vocabularyFileContent"; // Schlüssel für gespeicherten Dateiinhalt
+
 // Standard-Vokabelliste, falls keine Datei geladen wird
 /*
 const defaultVocabulary = [
@@ -251,6 +253,7 @@ document
       const reader = new FileReader();
       reader.onload = function (e) {
         const content = e.target.result;
+        localStorage.setItem(LOCAL_STORAGE_KEY, content);
         parseVocabulary(content);
         document.getElementById("settings").classList.remove("hidden");
       };
@@ -590,3 +593,16 @@ function playNegativSound() {
     playMp3Sound("sounds/triangle_open.mp3");
   }
 }
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Prüfen, ob gespeicherter Dateiinhalt existiert
+  const storedContent = localStorage.getItem(LOCAL_STORAGE_KEY);
+  if (storedContent) {
+    // Gespeicherten Dateiinhalt parsen und verwenden
+    parseVocabulary(storedContent);
+    console.log("Gespeicherte Datei geladen.");
+  }
+});
