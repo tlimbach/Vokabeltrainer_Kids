@@ -416,7 +416,7 @@ function loadMultipleChoiceQuestion() {
   if (direction === "en-de") {
     setTimeout(() => {
       speakQuestion(questionText);
-    }, 650);
+    }, 750);
   }
 
   const choices = [correctAnswer];
