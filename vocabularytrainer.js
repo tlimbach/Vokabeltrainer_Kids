@@ -5,8 +5,12 @@ let currentVocab = null;
 let correctAnswers = 0;
 let currentIndex = 0;
 let progressSegments = [];
+let completionAnimation = null;
+let completionAnimationDuration = 2000;
 
 const LOCAL_STORAGE_KEY = "vocabularyFileContent"; // Schlüssel für gespeicherten Dateiinhalt
+const COMPLETION_ANIMATION_PATH = "animations/firework.json";
+const COMPLETION_ANIMATION_SPEED = 0.5;
 
 // Standard-Vokabelliste, falls keine Datei geladen wird
 /*
@@ -393,6 +397,63 @@ function initializeProgressBar() {
   });
 }
 
+function initializeCompletionAnimation() {
+  const container = document.getElementById("completion-animation");
+  if (!container) {
+    return;
+  }
+
+  if (typeof lottie === "undefined") {
+    console.warn("Lottie-Bibliothek wurde nicht geladen.");
+    return;
+  }
+
+  completionAnimation = lottie.loadAnimation({
+    container,
+    renderer: "svg",
+    loop: false,
+    autoplay: false,
+    path: COMPLETION_ANIMATION_PATH,
+    name: "finish-flag-animation",
+  });
+  completionAnimation.setSpeed(COMPLETION_ANIMATION_SPEED);
+
+  completionAnimation.addEventListener("DOMLoaded", () => {
+    const duration = completionAnimation.getDuration() * 1000;
+    if (duration && !Number.isNaN(duration)) {
+      completionAnimationDuration = Math.max(2000, Math.round(duration));
+    }
+  });
+
+  completionAnimation.addEventListener("complete", () => {
+    setTimeout(hideCompletionOverlay, 700);
+  });
+}
+
+function playCompletionAnimation() {
+  const overlay = document.getElementById("completion-overlay");
+  if (!overlay || !completionAnimation) {
+    return 1000;
+  }
+
+  overlay.classList.add("active");
+  completionAnimation.goToAndStop(0, true);
+  completionAnimation.play();
+
+  return completionAnimationDuration + 700;
+}
+
+function hideCompletionOverlay() {
+  const overlay = document.getElementById("completion-overlay");
+  if (overlay) {
+    overlay.classList.remove("active");
+  }
+
+  if (completionAnimation) {
+    completionAnimation.stop();
+  }
+}
+
 let correctButton = null; // Variable zur Speicherung des Buttons mit der korrekten Antwort
 
 function loadMultipleChoiceQuestion() {
@@ -507,15 +568,19 @@ function showResultDialog() {
     }
   }
 
+  const completionDelay =
+    currentMode === "multiple-choice" ? playCompletionAnimation() : 1000;
+
   setTimeout(() => {
     alert(
       `Herzlichen Glückwunsch! Du hast ${correctAnswers} von ${vocabularyList.length} Vokabeln korrekt übersetzt!`
     );
     endTraining();
-  }, 1000); // Verzögerung des Alerts um 1 Sekunde
+  }, completionDelay); // Verzögerung des Alerts um die Animationsdauer
 }
 
 function endTraining() {
+  hideCompletionOverlay();
   document.getElementById("abortButton").classList.add("hidden");
   document.getElementById("settings").classList.remove("hidden");
   document.getElementById("flashcard-mode").classList.add("hidden");
@@ -605,4 +670,5 @@ document.addEventListener("DOMContentLoaded", () => {
     parseVocabulary(storedContent);
     console.log("Gespeicherte Datei geladen.");
   }
+  initializeCompletionAnimation();
 });

@@ -299,6 +299,27 @@ select, button {
     margin-right: 40px;
   }
 
- 
   
+  
+}
+
+#completion-overlay {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 1000;
+}
+
+#completion-overlay.active {
+  display: flex;
+}
+
+#completion-animation {
+  width: 90vw;
+  max-width: 900px;
+  height: 90vh;
+  max-height: 900px;
 }
