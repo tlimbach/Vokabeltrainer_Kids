@@ -27,7 +27,7 @@ const defaultVocabulary = [
   { deutsch: "Auto", englisch: "car", score: 0 }
 ];
 */
-/*
+
 const defaultVocabulary = [
   { deutsch: "Der Apfel ist rot.", englisch: "The apple is red.", score: 0 },
   { deutsch: "Das Haus ist groß.", englisch: "The house is big.", score: 0 },
@@ -40,8 +40,9 @@ const defaultVocabulary = [
   { deutsch: "Der Baum ist hoch.", englisch: "The tree is tall.", score: 0 },
   { deutsch: "Das Auto ist schnell.", englisch: "The car is fast.", score: 0 }
 ];
-*/
 
+
+/*
 const defaultVocabulary = [
   {
     deutsch: "Der Apfel, den ich gekauft habe, ist sehr saftig und lecker.",
@@ -108,6 +109,7 @@ const defaultVocabulary = [
     score: 0,
   },
 ];
+*/
 
 populateVoiceList();
 
